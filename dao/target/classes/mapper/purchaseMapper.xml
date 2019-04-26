@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csj.mapper.PurchaseMapper">
+  <resultMap id="BaseResultMap" type="com.csj.entity.Purchase">
+    <id column="ticket_no" jdbcType="VARCHAR" property="ticketNo" />
+    <result column="customer" jdbcType="VARCHAR" property="customer" />
+    <result column="quantity" jdbcType="DOUBLE" property="quantity" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="unit_price" jdbcType="DOUBLE" property="unitPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ticket_no, customer, quantity, amount, unit_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchase
+    where ticket_no = #{ticketNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from purchase
+    where ticket_no = #{ticketNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csj.entity.Purchase">
+    insert into purchase (ticket_no, customer, quantity, 
+      amount, unit_price)
+    values (#{ticketNo,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR}, #{quantity,jdbcType=DOUBLE}, 
+      #{amount,jdbcType=DOUBLE}, #{unitPrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csj.entity.Purchase">
+    insert into purchase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ticketNo != null">
+        ticket_no,
+      </if>
+      <if test="customer != null">
+        customer,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="unitPrice != null">
+        unit_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ticketNo != null">
+        #{ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="unitPrice != null">
+        #{unitPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csj.entity.Purchase">
+    update purchase
+    <set>
+      <if test="customer != null">
+        customer = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="unitPrice != null">
+        unit_price = #{unitPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ticket_no = #{ticketNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csj.entity.Purchase">
+    update purchase
+    set customer = #{customer,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=DOUBLE},
+      amount = #{amount,jdbcType=DOUBLE},
+      unit_price = #{unitPrice,jdbcType=DOUBLE}
+    where ticket_no = #{ticketNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
