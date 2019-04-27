@@ -1,4 +1,4 @@
-package com.csj;
+package com.csj.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.csj.entity.Purchase;

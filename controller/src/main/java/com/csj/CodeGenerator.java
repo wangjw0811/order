@@ -46,7 +46,8 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
+//        gc.setOutputDir(projectPath + "/src/main/java");
+        System.out.println(projectPath);
         gc.setAuthor("Jims");
         gc.setOpen(false);
         gc.setSwagger2(true); //实体属性 Swagger2 注解
@@ -54,11 +55,11 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.2.222:3306/csjsaas_test?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://192.168.11.101:3306/order?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("csjsaas_test");
-        dsc.setPassword("saastest");
+        dsc.setUsername("root");
+        dsc.setPassword("wyh900811@sina.com");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -77,6 +78,11 @@ public class CodeGenerator {
 
         // 如果模板引擎是 freemarker
         String templatePath = "/templates/mapper.xml.ftl";
+        String templatePathController = "/templates/controller.java.ftl";
+        String templatePathService = "/templates/service.java.ftl";
+        String templatePathServiceImpl = "/templates/serviceImpl.java.ftl";
+        String templatePathEntity = "/templates/entity.java.ftl";
+        String templatePathDao = "/templates/mapper.java.ftl";
         // 如果模板引擎是 velocity
         // String templatePath = "/templates/mapper.xml.vm";
 
@@ -87,8 +93,42 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + "/dao/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+            }
+        });
+        focList.add(new FileOutConfig(templatePathController) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/controller/src/main/java/com/csj/controller/" + tableInfo.getEntityName() + "Controller" + StringPool.DOT_JAVA;
+            }
+        });
+        focList.add(new FileOutConfig(templatePathService) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/service/src/main/java/com/csj/service/" +"I"+ tableInfo.getEntityName() + "Service" + StringPool.DOT_JAVA;
+            }
+        });
+        focList.add(new FileOutConfig(templatePathServiceImpl) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/service/src/main/java/com/csj/service/impl/" + tableInfo.getEntityName() + "ServiceImpl" + StringPool.DOT_JAVA;
+            }
+        });
+        focList.add(new FileOutConfig(templatePathEntity) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/entity/src/main/java/com/csj/entity/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
+            }
+        });
+        focList.add(new FileOutConfig(templatePathDao) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/dao/src/main/java/com/csj/mapper/" + tableInfo.getEntityName()+ "Mapper" + StringPool.DOT_JAVA;
             }
         });
         /*

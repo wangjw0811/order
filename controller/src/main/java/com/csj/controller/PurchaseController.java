@@ -2,7 +2,7 @@ package com.csj.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.csj.IPurchaseService;
+import com.csj.service.IPurchaseService;
 import com.csj.entity.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
