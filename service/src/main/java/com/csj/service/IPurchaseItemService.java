@@ -1,7 +1,7 @@
-package com.baomidou.service;
+package com.csj.service;
 
-import com.baomidou.entity.PurchaseItem;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.csj.entity.PurchaseItem;
 
 /**
  * <p>
@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-04-27
  */
 public interface IPurchaseItemService extends IService<PurchaseItem> {
+
+
 
 }

@@ -2,7 +2,7 @@ package com.csj.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.csj.service.IPurchaseService;
+import com.csj.OrderTemplate;
 import com.csj.entity.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,19 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/purchase")
 public class PurchaseController {
     @Autowired
-    private IPurchaseService purchaseService;
-
-    @PostMapping("/save")
-    public String  save(@RequestBody Purchase purchase){
-        purchaseService.save(purchase);
-        return "";
-    }
+    private OrderTemplate orderTemplate;
 
     @PostMapping("/page")
     public String  page(@RequestBody Purchase purchase){
         IPage page = new Page(1,10);
-        purchaseService.page(page);
+        orderTemplate.page(page);
         return "";
     }
+
+    @PostMapping("/inset")
+    public String inset(@RequestBody Purchase purchase){
+        return orderTemplate.insert(purchase);
+    }
+
 
 }

@@ -1,9 +1,9 @@
 package com.baomidou.service.impl;
 
-import com.baomidou.entity.PurchaseItem;
-import com.baomidou.mapper.PurchaseItemMapper;
-import com.baomidou.service.IPurchaseItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.csj.entity.PurchaseItem;
+import com.csj.mapper.PurchaseItemMapper;
+import com.csj.service.IPurchaseItemService;
 import org.springframework.stereotype.Service;
 
 /**
