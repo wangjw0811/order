@@ -1,7 +1,7 @@
-package com.baomidou.mapper;
+package com.csj.mapper;
 
-import com.baomidou.entity.PurchaseItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.csj.entity.PurchaseItem;
 
 /**
  * <p>

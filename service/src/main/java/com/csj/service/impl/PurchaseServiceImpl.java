@@ -1,20 +1,36 @@
 package com.csj.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.csj.service.IPurchaseService;
+import com.csj.OrderTemplate;
 import com.csj.entity.Purchase;
-import com.csj.mapper.PurchaseMapper;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author Jims
- * @since 2019-04-26
- */
+ * @description:
+ * @author: jims wang
+ * @createdate: 2019-04-28 10:38:22
+ **/
 @Service
-public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper,Purchase> implements IPurchaseService {
+public class PurchaseServiceImpl extends OrderTemplate<Purchase> {
 
+    @Override
+    protected boolean checkOk(Purchase entity) {
+        System.out.println("开始审核");
+        return false;
+    }
+
+    @Override
+    protected String createWorkflow(Purchase entity) {
+        System.out.println("开始创建工作流");
+        return null;
+    }
+
+    @Override
+    protected boolean automaticCheck() {
+        return false;
+    }
+
+    @Override
+    protected boolean startWorkflow() {
+        return true;
+    }
 }
